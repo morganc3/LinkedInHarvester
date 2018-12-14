@@ -20,6 +20,6 @@ Usage: python harvest.py COMPANY_ID DOMAIN COOKIE_FILE
   Prior to running harvest.py, place these two cookie values in a text file in the following format:
   ![alt text](https://raw.githubusercontent.com/morganc3/LinkedInHarvester/master/cookie_example.png)
     
-  Keep in mind there should be a newline after each cookie value!
+  Keep in mind there should be a newline after both cookie values!
       
   
