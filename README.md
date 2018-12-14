@@ -3,7 +3,7 @@ Scrapes names from LinkedIn companies and creates a list of email addresses from
 
 
 # How to use
-Usage: python harvest.py <COMPANY ID> <DOMAIN> <COOKIE FILE>
+Usage: python harvest.py COMPANY_ID DOMAIN COOKIE_FILE
   
  The company ID will be the value you see when you browse to the company's employees in LinkedIn, example shown below:
  
