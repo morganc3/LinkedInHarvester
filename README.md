@@ -1,5 +1,5 @@
 # LinkedInHarvester
-Scrapes names from LinkedIn companies and creates a list of email addresses from them.
+Scrapes names from LinkedIn companies and creates a list of email addresses from them. Email addresses will be output to emails.txt
 
 
 # How to use
