@@ -8,7 +8,9 @@ Usage: python harvest.py COMPANY_ID DOMAIN COOKIE_FILE
  The company ID will be the value you see when you browse to the company's employees in LinkedIn, example shown below:
  
  First, click here on the company page to see the employees:
+ 
  ![alt text](https://raw.githubusercontent.com/morganc3/LinkedInHarvester/master/employees_link.png) 
+ 
  ![alt text](https://raw.githubusercontent.com/morganc3/LinkedInHarvester/master/company_id.png)
  
  
