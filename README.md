@@ -25,6 +25,6 @@ Usage: python harvest.py COMPANY_ID DOMAIN COOKIE_FILE
   
   ![alt text](https://raw.githubusercontent.com/morganc3/LinkedInHarvester/master/cookie_example.png)
     
-  Keep in mind there should be a newline after both cookie values!
+  **Keep in mind there should be a newline after both cookie values!**
       
   
