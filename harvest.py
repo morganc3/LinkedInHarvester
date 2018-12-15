@@ -78,9 +78,13 @@ while not last_page:
 
 
 f = open('./emails.txt',"w+")
+count = len(emails)
 for i in emails:
 	f.write(i)
 
 f.close()
+
+print("Done! " + str(count) + " emails have been written to ./emails.txt")
+      
 
 
