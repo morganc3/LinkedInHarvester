@@ -38,7 +38,7 @@ def format_name(name):
 
 def harvest(curr):
 	global last_page
-
+	#count is set to 49 as that is the max (for god know's why)
 	url = ("https://www.linkedin.com/voyager/api/search/blended?"
 	"count=49&origin=OTHER&queryContext=List(spellCorrectionEnabled-%3Etrue,"
 	"crelatedSearchesEnabled-%3Etrue,kcardTypes-%3EPROFILE%7CCOMPANY)&q=all&filters=List(currentCompany-%3E" + company_id + ",resultType-%3EPEOPLE)&start=" + str(curr))
@@ -51,7 +51,8 @@ def harvest(curr):
 	data = json.load(response)
 	data = data["elements"][0]
 	data = data["elements"]
-
+	
+	#if len is not 49, we are on the final page.
 	if len(data) != 49:
 		last_page = True
 	
@@ -65,6 +66,7 @@ def harvest(curr):
 		fname = fname.replace(' ', '')
 		lname = lname.replace(' ', '')
 		if fname == "":
+			#private profile
 			continue
 
 		fullname = fname + ' ' + lname
