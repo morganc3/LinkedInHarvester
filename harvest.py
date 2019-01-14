@@ -1,16 +1,39 @@
-import json,urllib2,sys
+import json,urllib2,sys,optparse,argparse
 
-if(len(sys.argv) != 4):
+parser = argparse.ArgumentParser(description='Optional app description')
+parser.add_argument('company_arg', 
+                    help='Company ID')
+parser.add_argument('domain_arg',
+                    help='Domain to be used in email address')
+parser.add_argument('cookie_arg',
+                    help='Cookie file',metavar="FILE")
+
+parser.add_argument("-f", 
+                  action="store_true", dest="abbrevF", default=False,
+                  help="abbreviate first name")
+
+parser.add_argument("-l",
+                  action="store_true", dest="abbrevL", default=False,
+                  help="abbreviate last name")
+
+parser.add_argument("-s",
+                  action="store_true", dest="swap", default=False,
+                  help="switch order of first and last names")
+
+args = parser.parse_args()
+
+if(len(sys.argv) < 4):
 	print("Usage: python harvest.py <COMPANY ID> <DOMAIN> <COOKIE FILE>")
 	exit()
 
-company_id = sys.argv[1]
-domain = sys.argv[2]
+
+company_id = args.company_arg
+domain = args.domain_arg
 csrf_token = ''
 session_id = ''
 
 #get cookies
-f = open(sys.argv[3],"r")
+f = open(args.cookie_arg,"r")
 content = f.readlines()
 csrf_token = content[0][:-1] #removes newline
 session_id = content[1][:-1] #removes newline
@@ -38,7 +61,7 @@ def format_name(name):
 
 def harvest(curr):
 	global last_page
-	#count is set to 49 as that is the max (for god know's why)
+
 	url = ("https://www.linkedin.com/voyager/api/search/blended?"
 	"count=49&origin=OTHER&queryContext=List(spellCorrectionEnabled-%3Etrue,"
 	"crelatedSearchesEnabled-%3Etrue,kcardTypes-%3EPROFILE%7CCOMPANY)&q=all&filters=List(currentCompany-%3E" + company_id + ",resultType-%3EPEOPLE)&start=" + str(curr))
@@ -51,8 +74,7 @@ def harvest(curr):
 	data = json.load(response)
 	data = data["elements"][0]
 	data = data["elements"]
-	
-	#if len is not 49, we are on the final page.
+
 	if len(data) != 49:
 		last_page = True
 	
@@ -66,10 +88,16 @@ def harvest(curr):
 		fname = fname.replace(' ', '')
 		lname = lname.replace(' ', '')
 		if fname == "":
-			#private profile
 			continue
+		if args.abbrevF:
+			fname = fname[0:1]
+		if args.abbrevL:
+			lname = lname[0:1]
+		if args.swap:
+			fullname = lname + ' ' + fname
+		else:
+			fullname = fname + ' ' + lname
 
-		fullname = fname + ' ' + lname
 		email = format_name(fullname)
 		emails.append(email)
 
@@ -82,7 +110,11 @@ while not last_page:
 f = open('./emails.txt',"w+")
 count = len(emails)
 for i in emails:
-	f.write(i)
+   try:
+      f.write(i)
+   except:
+      print "This is an error message!"
+    
 
 f.close()
 
