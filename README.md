@@ -6,6 +6,11 @@ Scrapes names from LinkedIn companies and creates a list of email addresses from
 Usage: python harvest.py COMPANY_ID DOMAIN COOKIE_FILE
 
 Example: python harvest.py 207880 praetorian.com cookie.txt
+
+OPTIONS: 
+  -f abbreviate first name
+  -l abbreviate last name
+  -s swap order of first and last name
   
  1. The company ID will be the value you see when you browse to the company's employees in LinkedIn, example shown below:
  
