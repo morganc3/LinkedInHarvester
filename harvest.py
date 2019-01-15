@@ -1,11 +1,11 @@
 import json,urllib2,sys,optparse,argparse
 
-parser = argparse.ArgumentParser(description='Optional app description')
-parser.add_argument('company_arg', 
+parser = argparse.ArgumentParser(description='Creates email addresses with optional formatters from names of employees of a company on LinkedIn.')
+parser.add_argument('COMPANY', 
                     help='Company ID')
-parser.add_argument('domain_arg',
+parser.add_argument('DOMAIN',
                     help='Domain to be used in email address')
-parser.add_argument('cookie_arg',
+parser.add_argument('COOKIE',
                     help='Cookie file',metavar="FILE")
 
 parser.add_argument("-f", 
@@ -27,13 +27,13 @@ if(len(sys.argv) < 4):
 	exit()
 
 
-company_id = args.company_arg
-domain = args.domain_arg
+company_id = args.COMPANY
+domain = args.DOMAIN
 csrf_token = ''
 session_id = ''
 
 #get cookies
-f = open(args.cookie_arg,"r")
+f = open(args.COOKIE,"r")
 content = f.readlines()
 csrf_token = content[0][:-1] #removes newline
 session_id = content[1][:-1] #removes newline
@@ -113,7 +113,7 @@ for i in emails:
    try:
       f.write(i)
    except:
-      print "This is an error message!"
+      print('error writing one email due to strange character')
     
 
 f.close()
